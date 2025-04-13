@@ -79,10 +79,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)$(ProjectName)\build\$(Configuration)\$(ProjectName)\</OutDir>
+    <OutDir>$(SolutionDir)$(TargetName)\$(IntDir)\$(ProjectName)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)$(ProjectName)\build\$(Configuration)\$(ProjectName)\</OutDir>
+    <OutDir>$(SolutionDir)$(TargetName)\$(IntDir)\$(ProjectName)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -128,7 +128,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
-      <AdditionalIncludeDirectories>$(SolutionDir)$(ProjectName)\include\ </AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)$(ProjectName)\external\include\;$(SolutionDir)$(ProjectName)\include\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -136,7 +136,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>\$(SolutionDir)$(ProjectName)\external\build\$(Configuration) </AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>\$(SolutionDir)$(ProjectName)\external\build\$(Configuration)</AdditionalLibraryDirectories>
+      <OutputFile>$(SolutionDir)$(ProjectName)\build\$(Configuration)\$(TargetName)$(TargetExt)</OutputFile>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -151,7 +152,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
-      <AdditionalIncludeDirectories>$(SolutionDir)$(ProjectName)\include\ </AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)$(ProjectName)\external\include\;$(SolutionDir)$(ProjectName)\include\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -161,7 +162,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>\$(SolutionDir)$(ProjectName)\external\build\$(Configuration) </AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>\$(SolutionDir)$(ProjectName)\external\build\$(Configuration)</AdditionalLibraryDirectories>
+      <OutputFile>$(SolutionDir)$(ProjectName)\build\$(Configuration)\$(TargetName)$(TargetExt)</OutputFile>
     </Lib>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
