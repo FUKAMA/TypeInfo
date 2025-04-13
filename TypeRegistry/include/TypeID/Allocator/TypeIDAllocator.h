@@ -5,15 +5,23 @@
 
 namespace stl
 {
+	// 型ごとに一意に割り振られる連番のIDを表す型エイリアス
 	using TypeID = size_t;
 
 	/// <summary>
-	/// コンポーネントの一意なIDを生成、管理するクラス
+	///	型の一意なIDを生成、管理するクラス
+	/// 全ての翻訳単位で共通のインスタンスを使用することで同じIDを使用することができる
 	/// </summary>
 	class TypeIDAllocator
 	{
 	public:
 
+		/// <summary>
+		/// 一意な型IDをコンテナから取得する
+		/// まだ生成されてなければ生成してコンテナに追加する
+		/// </summary>
+		/// <typeparam name="Type"></typeparam>
+		/// <returns></returns>
 		template<typename Type>
 		TypeID GetID()
 		{
@@ -30,6 +38,10 @@ namespace stl
 
 	private:
 
+		/// <summary>
+		/// 新しく型IDを生成して登録する
+		/// </summary>
+		/// <param name="a_keyName">型ごとに展開される関数名の文字列</param>
 		void Allocate(std::string_view a_keyName);
 
 
@@ -42,12 +54,17 @@ namespace stl
 
 	};
 
+	/// <summary>
+	/// コンパイル時にGetTypeID関数内でインスタンスが作成され、
+	/// 型ごとに一意なIDを格納するクラス
+	/// </summary>
+	/// <typeparam name="Type"></typeparam>
 	template<typename Type>
 	class TypeIDContainer
 	{
 	private:
 		template<typename T>
-		friend TypeID GetTypeID<T>(TypeIDAllocator* a_pAllocator);
+		friend TypeID GetTypeID(TypeIDAllocator& a_allocator);
 
 		TypeIDContainer()
 		{
@@ -55,15 +72,17 @@ namespace stl
 		}
 	public:
 
-		inline TypeID GetID(TypeIDAllocator* a_pAllocator)
+		/// <summary>
+		/// このコンテナが管理する型IDを返す
+		/// 型IDが割り振られてなければ、引数のアロケータからIDを受け取る
+		/// </summary>
+		/// <param name="a_allocator"></param>
+		/// <returns></returns>
+		inline TypeID GetID(TypeIDAllocator& a_allocator)
 		{
 			if (m_id == 0)
 			{
-				if (a_pAllocator == nullptr)
-				{
-					return 0;
-				}
-				m_id = a_pAllocator->GetID<Type>();
+				m_id = a_allocator.GetID<Type>();
 			}
 			return m_id;
 		}
@@ -74,11 +93,18 @@ namespace stl
 
 	};
 
+	/// <summary>
+	/// 型ごとに一意で連番なIDを生成する関数
+	/// 同じTypeIDAllocatorのインスタンスを使うことで異なる翻訳単位間で共通の型IDを使うことができる
+	/// </summary>
+	/// <typeparam name="Type"></typeparam>
+	/// <param name="a_pAllocator"></param>
+	/// <returns></returns>
 	template<typename Type>
-	inline static TypeID GetTypeID(TypeIDAllocator* a_pAllocator)
+	inline static TypeID GetTypeID(TypeIDAllocator& a_allocator)
 	{
 		static TypeIDContainer<Type> idContainer;
-		return idContainer.GetID<Type>(a_pAllocator);
+		return idContainer.GetID(a_allocator);
 	}
 }
 
