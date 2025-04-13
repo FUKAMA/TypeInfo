@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{91691945-c9b4-4aa8-82e2-44a89e40c2f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{e30e7ea7-e9a3-4180-b7c2-03bb04d44d9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external">
+      <UniqueIdentifier>{13464e68-d525-43c9-9bfd-f616d8384515}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\Registry">
+      <UniqueIdentifier>{1aaa16fe-a64a-472d-ba1a-dddb015fadbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\TypeID">
+      <UniqueIdentifier>{d0dae19f-e96e-4848-8419-d23954a877da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\TypeID\Allocator">
+      <UniqueIdentifier>{779b67b3-e3b7-4646-ba9b-fc0327b2be63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\TypeID">
+      <UniqueIdentifier>{3555f8be-a3f2-42bc-b5df-8415185d8bf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\TypeID\Allocator">
+      <UniqueIdentifier>{a8dfb689-bbf2-4024-9953-02ab78185137}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\TypeRegistry.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Registry\Registry.h">
+      <Filter>include\Registry</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TypeID\Allocator\TypeIDAllocator.h">
+      <Filter>include\TypeID\Allocator</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\TypeID\Allocator\TypeIDAllocator.cpp">
+      <Filter>src\TypeID\Allocator</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
